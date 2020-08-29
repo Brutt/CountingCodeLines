@@ -7,7 +7,6 @@ public class SourceCodeLineCounter implements LineCounter {
     public SourceCodeLineCounter(InputStream inputStream, Replacer replacer) {
         String originCode = InputStreamToStringTransformer.transform(inputStream);
         this.code = replacer.replace(originCode);
-
     }
 
     @Override
