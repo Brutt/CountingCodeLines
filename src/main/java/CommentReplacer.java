@@ -3,6 +3,6 @@ public class CommentReplacer implements Replacer {
 
     @Override
     public String replace(String original) {
-        return null;
+        return original.replaceAll(pattern, "${replaceGroup}");
     }
 }
