@@ -1,3 +1,5 @@
+package replacer;
+
 public class CommentReplacer implements Replacer {
     @Override
     public String replace(String original) {

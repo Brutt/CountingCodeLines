@@ -1,5 +1,8 @@
+package counter;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import replacer.CommentReplacer;
 
 import java.io.ByteArrayInputStream;
 

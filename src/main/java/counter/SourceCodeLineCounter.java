@@ -1,3 +1,8 @@
+package counter;
+
+import replacer.Replacer;
+import util.InputStreamToStringTransformer;
+
 import java.io.InputStream;
 import java.util.Arrays;
 

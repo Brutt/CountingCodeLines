@@ -1,3 +1,5 @@
+package replacer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -54,6 +56,28 @@ class CommentReplacerTest {
                 "    }\n" +
                 "\n" +
                 "}";
+
+        assertEquals(expectedCodeWoComments, codeWoComments);
+    }
+
+    @Test
+    @DisplayName("Replace comments in source with cyrillic letters")
+    void replaceCommentsInSourceWithCyrillic() {
+        String code = "// This file contains 3 lines of code\n" +
+                "public interface Dave {\n" +
+                "    /**\n" +
+                "     * count the number of lines in a file\n" +
+                "     */\n" +
+                "    int countLines(File inFile); // not the real signature!\n" +
+                "} Привіт";
+        Replacer replacer = new CommentReplacer();
+        String codeWoComments = replacer.replace(code);
+
+        String expectedCodeWoComments = "\n" +
+                "public interface Dave {\n" +
+                "    \n" +
+                "    int countLines(File inFile); \n" +
+                "} Привіт";
 
         assertEquals(expectedCodeWoComments, codeWoComments);
     }
