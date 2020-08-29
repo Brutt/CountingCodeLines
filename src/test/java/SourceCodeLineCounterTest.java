@@ -10,7 +10,7 @@ class SourceCodeLineCounterTest {
 
     @Test
     @DisplayName("Should return 3 lines of source code")
-    void count() {
+    void count3Lines() {
         String code = "// This file contains 3 lines of code\n" +
                 "    public interface Dave {\n" +
                 "        /**\n" +
@@ -20,7 +20,7 @@ class SourceCodeLineCounterTest {
                 "    }";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(code.getBytes());
 
-        LineCounter lineCounter = new SourceCodeLineCounter(byteArrayInputStream);
+        LineCounter lineCounter = new SourceCodeLineCounter(byteArrayInputStream, new CommentReplacer());
         int sourceCodeLines = lineCounter.count();
 
         assertEquals(3, sourceCodeLines);
