@@ -34,6 +34,7 @@ public class FileDirectoryService {
         try (Stream<Path> walk = Files.walk(filenamePath)) {
             directoryPathToFiles = walk
                     .filter(x -> x.toString().endsWith(extension) || Files.isDirectory(x))
+                    .filter(x -> x.getParent() != null)
                     .collect(Collectors.groupingBy(Path::getParent, TreeMap::new, Collectors.toList()));
         }
 

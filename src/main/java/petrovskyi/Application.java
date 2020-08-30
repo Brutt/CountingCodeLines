@@ -32,7 +32,7 @@ public class Application {
             return;
         }
 
-        Path filenamePath = Paths.get(args[0]);
+        Path filenamePath = Paths.get(args[0]).toAbsolutePath();
 
         if (!checkPath(filenamePath)) {
             return;
