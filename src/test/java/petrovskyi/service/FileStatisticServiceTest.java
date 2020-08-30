@@ -1,15 +1,15 @@
 package petrovskyi.service;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import petrovskyi.counter.LineCounter;
 import petrovskyi.counter.SourceCodeLineCounter;
 import petrovskyi.entity.FileDirectoryHierarchy;
 import petrovskyi.entity.SourceFileReportStatistic;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import petrovskyi.replacer.CommentReplacer;
 import petrovskyi.replacer.Replacer;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileStatisticServiceTest {
     private final Replacer REPLACER = new CommentReplacer();
@@ -25,7 +25,7 @@ class FileStatisticServiceTest {
 
     @Test
     @DisplayName("Should return list of statistics for dir1 folder(including) in resource directory")
-    void getStatisticsForFolder() throws FileNotFoundException {
+    void getStatisticsForFolder() throws IOException {
         Map<Path, List<Path>> fileDirectoryPathToFiles = new TreeMap<>();
 
         Path dir1 = Paths.get("src", "test", "resources", "dir1").toAbsolutePath();
@@ -53,7 +53,7 @@ class FileStatisticServiceTest {
 
     @Test
     @DisplayName("Should return total number of lines in dir1 folder in resource directory and fill list of statistics for subfiles")
-    void getTotalCodeLinesAndFillStatisticsForFolder() throws FileNotFoundException {
+    void getTotalCodeLinesAndFillStatisticsForFolder() throws IOException {
         Map<Path, List<Path>> fileDirectoryPathToFiles = new TreeMap<>();
 
         Path dir1 = Paths.get("src", "test", "resources", "dir1").toAbsolutePath();
@@ -66,11 +66,10 @@ class FileStatisticServiceTest {
         fileDirectoryPathToFiles.put(dir1, dir1SubFiles);
 
         FileStatisticService fileStatisticService = new FileStatisticService(LINE_COUNTER);
-        int totalCodeLines = fileStatisticService.getTotalCodeLinesAndFillStatistics(dir1, fileDirectoryPathToFiles, 1);
+        List<SourceFileReportStatistic> statistics = new ArrayList<>();
+        int totalCodeLines = fileStatisticService.getTotalCodeLinesAndFillStatistics(dir1, fileDirectoryPathToFiles, 1, statistics);
 
         assertEquals(3, totalCodeLines); //file 1.txt contains 3 lines
-
-        List<SourceFileReportStatistic> statistics = fileStatisticService.getStatistics();
         assertEquals(3, statistics.size());
 
         List<SourceFileReportStatistic> expectedStatistics = getStatisticsForDir11(false);
@@ -83,7 +82,7 @@ class FileStatisticServiceTest {
 
     @Test
     @DisplayName("Should return total number of lines for 1.txt file in resource directory and fill list of statistics for it")
-    void getTotalCodeLinesAndFillStatisticsForFile() throws FileNotFoundException {
+    void getTotalCodeLinesAndFillStatisticsForFile() throws IOException {
         Map<Path, List<Path>> fileDirectoryPathToFiles = new TreeMap<>();
 
         Path txt1File = Paths.get("src", "test", "resources", "dir1", "1.txt").toAbsolutePath();
@@ -94,21 +93,20 @@ class FileStatisticServiceTest {
         fileDirectoryPathToFiles.put(txt1File, txt1FileSubFiles);
 
         FileStatisticService fileStatisticService = new FileStatisticService(LINE_COUNTER);
-        int totalCodeLines = fileStatisticService.getTotalCodeLinesAndFillStatistics(txt1File, fileDirectoryPathToFiles, 0);
+        List<SourceFileReportStatistic> statistics = new ArrayList<>();
+        int totalCodeLines = fileStatisticService.getTotalCodeLinesAndFillStatistics(txt1File, fileDirectoryPathToFiles, 0, statistics);
 
         assertEquals(3, totalCodeLines); //file 1.txt contains 3 lines
-
-        List<SourceFileReportStatistic> statistics = fileStatisticService.getStatistics();
         assertEquals(1, statistics.size());
 
         List<SourceFileReportStatistic> expectedStatistics = getStatisticsFor1TxtFile();
         assertEquals(expectedStatistics, statistics);
     }
 
-    private List<SourceFileReportStatistic> getStatisticsForDir11(boolean withRoot){
+    private List<SourceFileReportStatistic> getStatisticsForDir11(boolean withRoot) {
         List<SourceFileReportStatistic> expectedStatistics = new ArrayList<>();
 
-        if(withRoot){
+        if (withRoot) {
             SourceFileReportStatistic dir11Statistic = new SourceFileReportStatistic();
             dir11Statistic.setDirectory(true);
             dir11Statistic.setDepth(0);
@@ -141,7 +139,7 @@ class FileStatisticServiceTest {
         return expectedStatistics;
     }
 
-    private List<SourceFileReportStatistic> getStatisticsFor1TxtFile(){
+    private List<SourceFileReportStatistic> getStatisticsFor1TxtFile() {
         List<SourceFileReportStatistic> expectedStatistics = new ArrayList<>();
 
         SourceFileReportStatistic txt1FileStatistic = new SourceFileReportStatistic();

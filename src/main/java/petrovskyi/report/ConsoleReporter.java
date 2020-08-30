@@ -8,23 +8,21 @@ public class ConsoleReporter implements Reporter {
     @Override
     public void write(List<SourceFileReportStatistic> statistics) {
         for (SourceFileReportStatistic statistic : statistics) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder
-                    .append(indent(statistic.getDepth()))
-                    .append(statistic.getPath().getFileName().toString())
-                    .append(" : ")
-                    .append(statistic.getLinesNumber());
+            String stringStatistic = indent(statistic.getDepth()) +
+                    statistic.getPath().getFileName().toString() +
+                    " : " +
+                    statistic.getLinesNumber();
 
-            System.out.println(stringBuilder);
+            System.out.println(stringStatistic);
         }
     }
 
-    private String indent(int spaceCount) {
+    private StringBuilder indent(int spaceCount) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < spaceCount; i++) {
             stringBuilder.append(" ");
         }
 
-        return stringBuilder.toString();
+        return stringBuilder;
     }
 }

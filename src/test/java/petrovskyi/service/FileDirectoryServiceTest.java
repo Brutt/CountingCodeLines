@@ -1,8 +1,8 @@
 package petrovskyi.service;
 
-import petrovskyi.entity.FileDirectoryHierarchy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import petrovskyi.entity.FileDirectoryHierarchy;
 
 import java.io.IOException;
 import java.nio.file.Path;
