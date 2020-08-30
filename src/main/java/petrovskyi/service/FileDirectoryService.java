@@ -1,7 +1,7 @@
 package petrovskyi.service;
 
-import petrovskyi.entity.FileDirectoryHierarchy;
 import lombok.RequiredArgsConstructor;
+import petrovskyi.entity.FileDirectoryHierarchy;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +17,6 @@ public class FileDirectoryService {
     private final String extension;
 
     public FileDirectoryHierarchy getFileDirectoryHierarchy(Path filenamePath) throws IOException {
-
         FileDirectoryHierarchy fileDirectoryHierarchy = new FileDirectoryHierarchy();
 
         if (Files.isDirectory(filenamePath)) {

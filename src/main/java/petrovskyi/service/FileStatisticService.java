@@ -1,9 +1,9 @@
 package petrovskyi.service;
 
+import lombok.RequiredArgsConstructor;
 import petrovskyi.counter.LineCounter;
 import petrovskyi.entity.FileDirectoryHierarchy;
 import petrovskyi.entity.SourceFileReportStatistic;
-import lombok.RequiredArgsConstructor;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

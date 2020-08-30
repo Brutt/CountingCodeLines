@@ -41,9 +41,14 @@ class FileStatisticServiceTest {
 
         FileStatisticService fileStatisticService = new FileStatisticService(LINE_COUNTER);
         List<SourceFileReportStatistic> statistics = fileStatisticService.getStatistics(dir1, fileDirectoryHierarchy);
+        assertEquals(4, statistics.size());
 
         List<SourceFileReportStatistic> expectedStatistics = getStatisticsForDir11(true);
-        assertEquals(expectedStatistics, statistics);
+        assertEquals(expectedStatistics.size(), statistics.size());
+        for (SourceFileReportStatistic statistic : statistics) {
+            expectedStatistics.remove(statistic);
+        }
+        assertEquals(0, expectedStatistics.size());
     }
 
     @Test
@@ -69,7 +74,11 @@ class FileStatisticServiceTest {
         assertEquals(3, statistics.size());
 
         List<SourceFileReportStatistic> expectedStatistics = getStatisticsForDir11(false);
-        assertEquals(expectedStatistics, statistics);
+        assertEquals(expectedStatistics.size(), statistics.size());
+        for (SourceFileReportStatistic statistic : statistics) {
+            expectedStatistics.remove(statistic);
+        }
+        assertEquals(0, expectedStatistics.size());
     }
 
     @Test
