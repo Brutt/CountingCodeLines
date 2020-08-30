@@ -1,5 +1,7 @@
 package counter;
 
+import java.io.InputStream;
+
 public interface LineCounter {
-    int count();
+    int count(InputStream inputStream);
 }

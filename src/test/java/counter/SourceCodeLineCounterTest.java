@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SourceCodeLineCounterTest {
-
+    private final CommentReplacer replacer = new CommentReplacer();
 
     @Test
     @DisplayName("Should return 3 lines of source code")
@@ -23,8 +23,9 @@ class SourceCodeLineCounterTest {
                 "    }";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(code.getBytes());
 
-        LineCounter lineCounter = new SourceCodeLineCounter(byteArrayInputStream, new CommentReplacer());
-        int sourceCodeLines = lineCounter.count();
+
+        LineCounter lineCounter = new SourceCodeLineCounter(replacer);
+        int sourceCodeLines = lineCounter.count(byteArrayInputStream);
 
         assertEquals(3, sourceCodeLines);
     }
@@ -47,8 +48,8 @@ class SourceCodeLineCounterTest {
                 "}";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(code.getBytes());
 
-        LineCounter lineCounter = new SourceCodeLineCounter(byteArrayInputStream, new CommentReplacer());
-        int sourceCodeLines = lineCounter.count();
+        LineCounter lineCounter = new SourceCodeLineCounter(new CommentReplacer());
+        int sourceCodeLines = lineCounter.count(byteArrayInputStream);
 
         assertEquals(5, sourceCodeLines);
     }
