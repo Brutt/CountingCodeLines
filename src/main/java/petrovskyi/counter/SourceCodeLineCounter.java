@@ -1,7 +1,7 @@
-package counter;
+package petrovskyi.counter;
 
-import replacer.Replacer;
-import util.InputStreamToStringTransformer;
+import petrovskyi.replacer.Replacer;
+import petrovskyi.util.InputStreamToStringTransformer;
 
 import java.io.InputStream;
 import java.util.Arrays;

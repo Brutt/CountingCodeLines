@@ -1,4 +1,4 @@
-package entity;
+package petrovskyi.entity;
 
 import lombok.Getter;
 import lombok.Setter;

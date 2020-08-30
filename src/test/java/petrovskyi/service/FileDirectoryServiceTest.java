@@ -1,6 +1,6 @@
-package service;
+package petrovskyi.service;
 
-import entity.FileDirectoryHierarchy;
+import petrovskyi.entity.FileDirectoryHierarchy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

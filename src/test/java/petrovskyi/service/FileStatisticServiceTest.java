@@ -1,13 +1,13 @@
-package service;
+package petrovskyi.service;
 
-import counter.LineCounter;
-import counter.SourceCodeLineCounter;
-import entity.FileDirectoryHierarchy;
-import entity.SourceFileReportStatistic;
+import petrovskyi.counter.LineCounter;
+import petrovskyi.counter.SourceCodeLineCounter;
+import petrovskyi.entity.FileDirectoryHierarchy;
+import petrovskyi.entity.SourceFileReportStatistic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import replacer.CommentReplacer;
-import replacer.Replacer;
+import petrovskyi.replacer.CommentReplacer;
+import petrovskyi.replacer.Replacer;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;

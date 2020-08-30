@@ -1,8 +1,8 @@
-package counter;
+package petrovskyi.counter;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import replacer.CommentReplacer;
+import petrovskyi.replacer.CommentReplacer;
 
 import java.io.*;
 import java.nio.file.Paths;

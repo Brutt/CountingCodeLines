@@ -1,4 +1,4 @@
-package replacer;
+package petrovskyi.replacer;
 
 public class CommentReplacer implements Replacer {
     @Override

@@ -1,6 +1,5 @@
-package entity;
+package petrovskyi.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.nio.file.Path;

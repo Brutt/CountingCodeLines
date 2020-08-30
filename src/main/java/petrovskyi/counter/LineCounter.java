@@ -1,4 +1,4 @@
-package counter;
+package petrovskyi.counter;
 
 import java.io.InputStream;
 

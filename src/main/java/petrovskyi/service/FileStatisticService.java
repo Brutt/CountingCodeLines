@@ -1,8 +1,8 @@
-package service;
+package petrovskyi.service;
 
-import counter.LineCounter;
-import entity.FileDirectoryHierarchy;
-import entity.SourceFileReportStatistic;
+import petrovskyi.counter.LineCounter;
+import petrovskyi.entity.FileDirectoryHierarchy;
+import petrovskyi.entity.SourceFileReportStatistic;
 import lombok.RequiredArgsConstructor;
 
 import java.io.FileInputStream;
@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -23,17 +24,17 @@ public class FileStatisticService {
         boolean isDirectory = Files.isDirectory(root);
 
         if (isDirectory) {
+            int totalLinesNumber = getTotalCodeLinesAndFillStatistics(root, fileDirectoryHierarchy.getFileDirectoryPathToFiles(), 1);
+
             SourceFileReportStatistic statistic = new SourceFileReportStatistic();
             statistic.setPath(root);
             statistic.setDepth(0);
             statistic.setDirectory(isDirectory);
+            statistic.setLinesNumber(totalLinesNumber);
 
             statistics.add(statistic);
 
-            int totalLinesNumber = getTotalCodeLinesAndFillStatistics(root, fileDirectoryHierarchy.getFileDirectoryPathToFiles(), 1);
-
-            statistic.setLinesNumber(totalLinesNumber);
-
+            Collections.reverse(statistics); //reverse list to get folders on the first places
         } else {
             getTotalCodeLinesAndFillStatistics(root, fileDirectoryHierarchy.getFileDirectoryPathToFiles(), 0);
         }
