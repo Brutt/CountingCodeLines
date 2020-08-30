@@ -4,7 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import replacer.CommentReplacer;
 
-import java.io.ByteArrayInputStream;
+import java.io.*;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,6 +53,30 @@ class SourceCodeLineCounterTest {
         int sourceCodeLines = lineCounter.count(byteArrayInputStream);
 
         assertEquals(5, sourceCodeLines);
+    }
+
+    @Test
+    @DisplayName("Should return 5 lines of source code in file")
+    void count5LinesInFile() throws FileNotFoundException {
+        File file = Paths.get("src", "test", "resources", "Hello.java").toAbsolutePath().toFile();
+        InputStream inputStream = new FileInputStream(file);
+
+        LineCounter lineCounter = new SourceCodeLineCounter(new CommentReplacer());
+        int sourceCodeLines = lineCounter.count(inputStream);
+
+        assertEquals(5, sourceCodeLines);
+    }
+
+    @Test
+    @DisplayName("Should return 3 lines of source code in file")
+    void count3LinesInFile() throws FileNotFoundException {
+        File file = Paths.get("src", "test", "resources", "Dave.java").toAbsolutePath().toFile();
+        InputStream inputStream = new FileInputStream(file);
+
+        LineCounter lineCounter = new SourceCodeLineCounter(new CommentReplacer());
+        int sourceCodeLines = lineCounter.count(inputStream);
+
+        assertEquals(3, sourceCodeLines);
     }
 }
 
